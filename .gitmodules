@@ -1,3 +1,6 @@
 [submodule "case"]
 	path = case
 	url = git@github.com:whisper-language/whisper-language-test.git
+[submodule "whisper-garmmer"]
+	path = whisper-garmmer
+	url = git@github.com:whisper-language/whisper-garmmer.git
