@@ -1,0 +1,3 @@
+[submodule "case"]
+	path = case
+	url = git@github.com:whisper-language/whisper-language-test.git
