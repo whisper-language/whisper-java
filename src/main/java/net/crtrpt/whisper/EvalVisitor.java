@@ -11,14 +11,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.crtrpt.whisper.gen.TLBaseVisitor;
-import net.crtrpt.whisper.gen.TLLexer;
-import net.crtrpt.whisper.gen.TLParser;
+import net.crtrpt.whisper.gen.WhisperLanguageBaseVisitor;
+import net.crtrpt.whisper.gen.WhisperLanguageLexer;
+import net.crtrpt.whisper.gen.WhisperLanguageParser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class EvalVisitor extends TLBaseVisitor<TLValue> {
+public class EvalVisitor extends WhisperLanguageBaseVisitor<TLValue> {
     private static ReturnValue returnValue = new ReturnValue();
     private Scope scope;
     private Map<String, Function> functions;
@@ -35,10 +35,12 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         this.functions = new HashMap<>(functions);
         this.buildFunction = buildinFunction;
     }
+    
+
 
     // functionDecl
     @Override
-    public TLValue visitFunctionDecl(TLParser.FunctionDeclContext ctx) {
+    public TLValue visitFunctionDecl(WhisperLanguageParser.FunctionDeclContext ctx) {
         List<TerminalNode> params = ctx.idList() != null ? ctx.idList().Identifier() : new ArrayList<TerminalNode>();
         ParseTree block = ctx.block();
         String id = ctx.Identifier().getText() + params.size();
@@ -49,10 +51,10 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // list: '[' exprList? ']'
     @Override
-    public TLValue visitList(TLParser.ListContext ctx) {
+    public TLValue visitList_Alias(WhisperLanguageParser.List_AliasContext ctx) {
         List<TLValue> list = new ArrayList<>();
         if (ctx.exprList() != null) {
-            for (TLParser.ExpressionContext ex : ctx.exprList().expression()) {
+            for (WhisperLanguageParser.ExpressionContext ex : ctx.exprList().expression()) {
                 list.add(this.visit(ex));
             }
         }
@@ -62,7 +64,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // '-' expression                           #unaryMinusExpression
     @Override
-    public TLValue visitUnaryMinusExpression(TLParser.UnaryMinusExpressionContext ctx) {
+    public TLValue visitUnaryMinusExpression(WhisperLanguageParser.UnaryMinusExpressionContext ctx) {
         TLValue v = this.visit(ctx.expression());
         if (!v.isNumber()) {
             throw new EvalException(ctx);
@@ -72,7 +74,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // '!' expression                           #notExpression
     @Override
-    public TLValue visitNotExpression(TLParser.NotExpressionContext ctx) {
+    public TLValue visitNotExpression(WhisperLanguageParser.NotExpressionContext ctx) {
         TLValue v = this.visit(ctx.expression());
         if (!v.isBoolean()) {
             throw new EvalException(ctx);
@@ -82,7 +84,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // expression '^' expression                #powerExpression
     @Override
-    public TLValue visitPowerExpression(TLParser.PowerExpressionContext ctx) {
+    public TLValue visitPowerExpression(WhisperLanguageParser.PowerExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs.isNumber() && rhs.isNumber()) {
@@ -93,13 +95,13 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // expression op=( '*' | '/' | '%' ) expression         #multExpression
     @Override
-    public TLValue visitMultExpression(TLParser.MultExpressionContext ctx) {
+    public TLValue visitMultExpression(WhisperLanguageParser.MultExpressionContext ctx) {
         switch (ctx.op.getType()) {
-            case TLLexer.Multiply:
+            case WhisperLanguageLexer.Multiply:
                 return multiply(ctx);
-            case TLLexer.Divide:
+            case WhisperLanguageLexer.Divide:
                 return divide(ctx);
-            case TLLexer.Modulus:
+            case WhisperLanguageLexer.Modulus:
                 return modulus(ctx);
             default:
                 throw new RuntimeException("unknown operator type: " + ctx.op.getType());
@@ -108,11 +110,11 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // expression op=( '+' | '-' ) expression               #addExpression
     @Override
-    public TLValue visitAddExpression(TLParser.AddExpressionContext ctx) {
+    public TLValue visitAddExpression(WhisperLanguageParser.AddExpressionContext ctx) {
         switch (ctx.op.getType()) {
-            case TLLexer.Add:
+            case WhisperLanguageLexer.Add:
                 return add(ctx);
-            case TLLexer.Subtract:
+            case WhisperLanguageLexer.Subtract:
                 return subtract(ctx);
             default:
                 throw new RuntimeException("unknown operator type: " + ctx.op.getType());
@@ -121,15 +123,15 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // expression op=( '>=' | '<=' | '>' | '<' ) expression #compExpression
     @Override
-    public TLValue visitCompExpression(TLParser.CompExpressionContext ctx) {
+    public TLValue visitCompExpression(WhisperLanguageParser.CompExpressionContext ctx) {
         switch (ctx.op.getType()) {
-            case TLLexer.LT:
+            case WhisperLanguageLexer.LT:
                 return lt(ctx);
-            case TLLexer.LTEquals:
+            case WhisperLanguageLexer.LTEquals:
                 return ltEq(ctx);
-            case TLLexer.GT:
+            case WhisperLanguageLexer.GT:
                 return gt(ctx);
-            case TLLexer.GTEquals:
+            case WhisperLanguageLexer.GTEquals:
                 return gtEq(ctx);
             default:
                 throw new RuntimeException("unknown operator type: " + ctx.op.getType());
@@ -138,18 +140,18 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // expression op=( '==' | '!=' ) expression             #eqExpression
     @Override
-    public TLValue visitEqExpression(TLParser.EqExpressionContext ctx) {
+    public TLValue visitEqExpression(WhisperLanguageParser.EqExpressionContext ctx) {
         switch (ctx.op.getType()) {
-            case TLLexer.Equals:
+            case WhisperLanguageLexer.Equals:
                 return eq(ctx);
-            case TLLexer.NEquals:
+            case WhisperLanguageLexer.NEquals:
                 return nEq(ctx);
             default:
                 throw new RuntimeException("unknown operator type: " + ctx.op.getType());
         }
     }
 
-    public TLValue multiply(TLParser.MultExpressionContext ctx) {
+    public TLValue multiply(WhisperLanguageParser.MultExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs == null || rhs == null) {
@@ -185,7 +187,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         throw new EvalException(ctx);
     }
 
-    private TLValue divide(TLParser.MultExpressionContext ctx) {
+    private TLValue divide(WhisperLanguageParser.MultExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs.isNumber() && rhs.isNumber()) {
@@ -194,7 +196,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         throw new EvalException(ctx);
     }
 
-    private TLValue modulus(TLParser.MultExpressionContext ctx) {
+    private TLValue modulus(WhisperLanguageParser.MultExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs.isNumber() && rhs.isNumber()) {
@@ -203,7 +205,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         throw new EvalException(ctx);
     }
 
-    private TLValue add(TLParser.AddExpressionContext ctx) {
+    private TLValue add(WhisperLanguageParser.AddExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
 
@@ -236,7 +238,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         return new TLValue(lhs.toString() + rhs.toString());
     }
 
-    private TLValue subtract(TLParser.AddExpressionContext ctx) {
+    private TLValue subtract(WhisperLanguageParser.AddExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs.isNumber() && rhs.isNumber()) {
@@ -250,7 +252,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         throw new EvalException(ctx);
     }
 
-    private TLValue gtEq(TLParser.CompExpressionContext ctx) {
+    private TLValue gtEq(WhisperLanguageParser.CompExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs.isNumber() && rhs.isNumber()) {
@@ -262,7 +264,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         throw new EvalException(ctx);
     }
 
-    private TLValue ltEq(TLParser.CompExpressionContext ctx) {
+    private TLValue ltEq(WhisperLanguageParser.CompExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs.isNumber() && rhs.isNumber()) {
@@ -274,7 +276,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         throw new EvalException(ctx);
     }
 
-    private TLValue gt(TLParser.CompExpressionContext ctx) {
+    private TLValue gt(WhisperLanguageParser.CompExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs.isNumber() && rhs.isNumber()) {
@@ -286,7 +288,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         throw new EvalException(ctx);
     }
 
-    private TLValue lt(TLParser.CompExpressionContext ctx) {
+    private TLValue lt(WhisperLanguageParser.CompExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs.isNumber() && rhs.isNumber()) {
@@ -298,7 +300,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         throw new EvalException(ctx);
     }
 
-    private TLValue eq(TLParser.EqExpressionContext ctx) {
+    private TLValue eq(WhisperLanguageParser.EqExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         if (lhs == null) {
@@ -307,7 +309,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         return new TLValue(lhs.equals(rhs));
     }
 
-    private TLValue nEq(TLParser.EqExpressionContext ctx) {
+    private TLValue nEq(WhisperLanguageParser.EqExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
         return new TLValue(!lhs.equals(rhs));
@@ -315,7 +317,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // expression '&&' expression               #andExpression
     @Override
-    public TLValue visitAndExpression(TLParser.AndExpressionContext ctx) {
+    public TLValue visitAndExpression(WhisperLanguageParser.AndExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
 
@@ -327,7 +329,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // expression '||' expression               #orExpression
     @Override
-    public TLValue visitOrExpression(TLParser.OrExpressionContext ctx) {
+    public TLValue visitOrExpression(WhisperLanguageParser.OrExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
 
@@ -339,7 +341,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // expression '?' expression ':' expression #ternaryExpression
     @Override
-    public TLValue visitTernaryExpression(TLParser.TernaryExpressionContext ctx) {
+    public TLValue visitTernaryExpression(WhisperLanguageParser.TernaryExpressionContext ctx) {
         TLValue condition = this.visit(ctx.expression(0));
         if (condition.asBoolean()) {
             return this.visit(ctx.expression(1));
@@ -350,7 +352,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // expression In expression                 #inExpression
     @Override
-    public TLValue visitInExpression(TLParser.InExpressionContext ctx) {
+    public TLValue visitInExpression(WhisperLanguageParser.InExpressionContext ctx) {
         TLValue lhs = this.visit(ctx.expression(0));
         TLValue rhs = this.visit(ctx.expression(1));
 
@@ -367,24 +369,24 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // Number                                   #numberExpression
     @Override
-    public TLValue visitNumberExpression(TLParser.NumberExpressionContext ctx) {
+    public TLValue visitNumberExpression(WhisperLanguageParser.NumberExpressionContext ctx) {
         return new TLValue(Double.valueOf(ctx.getText()));
     }
 
     // Bool                                     #boolExpression
     @Override
-    public TLValue visitBoolExpression(TLParser.BoolExpressionContext ctx) {
+    public TLValue visitBoolExpression(WhisperLanguageParser.BoolExpressionContext ctx) {
         return new TLValue(Boolean.valueOf(ctx.getText()));
     }
 
     // Null                                     #nullExpression
     @Override
-    public TLValue visitNullExpression(TLParser.NullExpressionContext ctx) {
+    public TLValue visitNullExpression(WhisperLanguageParser.NullExpressionContext ctx) {
         return TLValue.NULL;
     }
 
-    private TLValue resolveIndexes(TLValue val, List<TLParser.ExpressionContext> indexes) {
-        for (TLParser.ExpressionContext ec : indexes) {
+    private TLValue resolveIndexes(TLValue val, List<WhisperLanguageParser.ExpressionContext> indexes) {
+        for (WhisperLanguageParser.ExpressionContext ec : indexes) {
             TLValue idx = this.visit(ec);
             if (!idx.isNumber() || (!val.isList() && !val.isString())) {
                 throw new EvalException("Problem resolving indexes on " + val + " at " + idx, ec);
@@ -399,7 +401,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
         return val;
     }
 
-    private void setAtIndex(ParserRuleContext ctx, List<TLParser.ExpressionContext> indexes, TLValue val, TLValue newVal) {
+    private void setAtIndex(ParserRuleContext ctx, List<WhisperLanguageParser.ExpressionContext> indexes, TLValue val, TLValue newVal) {
         if (!val.isList()) {
             throw new EvalException(ctx);
         }
@@ -419,12 +421,12 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // functionCall indexes?                    #functionCallExpression
     @Override
-    public TLValue visitFunctionCallExpression(TLParser.FunctionCallExpressionContext ctx) {
+    public TLValue visitFunctionCallExpression(WhisperLanguageParser.FunctionCallExpressionContext ctx) {
 
 
         TLValue val = this.visit(ctx.functionCall());
         if (ctx.indexes() != null) {
-            List<TLParser.ExpressionContext> exps = ctx.indexes().expression();
+            List<WhisperLanguageParser.ExpressionContext> exps = ctx.indexes().expression();
             val = resolveIndexes(val, exps);
         }
         return val;
@@ -432,10 +434,10 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // list indexes?                            #listExpression
     @Override
-    public TLValue visitListExpression(TLParser.ListExpressionContext ctx) {
-        TLValue val = this.visit(ctx.list());
+    public TLValue visitListExpression(WhisperLanguageParser.ListExpressionContext ctx) {
+        TLValue val = this.visit(ctx.list_Alias());
         if (ctx.indexes() != null) {
-            List<TLParser.ExpressionContext> exps = ctx.indexes().expression();
+            List<WhisperLanguageParser.ExpressionContext> exps = ctx.indexes().expression();
             val = resolveIndexes(val, exps);
         }
         return val;
@@ -443,12 +445,12 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // Identifier indexes?                      #identifierExpression
     @Override
-    public TLValue visitIdentifierExpression(TLParser.IdentifierExpressionContext ctx) {
+    public TLValue visitIdentifierExpression(WhisperLanguageParser.IdentifierExpressionContext ctx) {
         String id = ctx.Identifier().getText();
         TLValue val = scope.resolve(id);
 
         if (ctx.indexes() != null) {
-            List<TLParser.ExpressionContext> exps = ctx.indexes().expression();
+            List<WhisperLanguageParser.ExpressionContext> exps = ctx.indexes().expression();
             val = resolveIndexes(val, exps);
         }
         return val;
@@ -456,12 +458,12 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // String indexes?                          #stringExpression
     @Override
-    public TLValue visitStringExpression(TLParser.StringExpressionContext ctx) {
+    public TLValue visitStringExpression(WhisperLanguageParser.StringExpressionContext ctx) {
         String text = ctx.getText();
         text = text.substring(1, text.length() - 1).replaceAll("\\\\(.)", "$1");
         TLValue val = new TLValue(text);
         if (ctx.indexes() != null) {
-            List<TLParser.ExpressionContext> exps = ctx.indexes().expression();
+            List<WhisperLanguageParser.ExpressionContext> exps = ctx.indexes().expression();
             val = resolveIndexes(val, exps);
         }
         return val;
@@ -469,10 +471,10 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // '(' expression ')' indexes?              #expressionExpression
     @Override
-    public TLValue visitExpressionExpression(TLParser.ExpressionExpressionContext ctx) {
+    public TLValue visitExpressionExpression(WhisperLanguageParser.ExpressionExpressionContext ctx) {
         TLValue val = this.visit(ctx.expression());
         if (ctx.indexes() != null) {
-            List<TLParser.ExpressionContext> exps = ctx.indexes().expression();
+            List<WhisperLanguageParser.ExpressionContext> exps = ctx.indexes().expression();
             val = resolveIndexes(val, exps);
         }
         return val;
@@ -480,8 +482,8 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // Input '(' String? ')'                    #inputExpression
     @Override
-    public TLValue visitInputExpression(TLParser.InputExpressionContext ctx) {
-        TerminalNode inputString = ctx.String();
+    public TLValue visitInputExpression(WhisperLanguageParser.InputExpressionContext ctx) {
+        TerminalNode inputString = ctx.String_Alias();
         try {
             if (inputString != null) {
                 String text = inputString.getText();
@@ -501,11 +503,11 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
     // : Identifier indexes? '=' expression
     // ;
     @Override
-    public TLValue visitAssignment(TLParser.AssignmentContext ctx) {
+    public TLValue visitAssignment(WhisperLanguageParser.AssignmentContext ctx) {
         TLValue newVal = this.visit(ctx.expression());
         if (ctx.indexes() != null) {
             TLValue val = scope.resolve(ctx.Identifier().getText());
-            List<TLParser.ExpressionContext> exps = ctx.indexes().expression();
+            List<WhisperLanguageParser.ExpressionContext> exps = ctx.indexes().expression();
             setAtIndex(ctx, exps, val, newVal);
         } else {
             String id = ctx.Identifier().getText();
@@ -515,13 +517,13 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
     }
 
     @Override
-    public TLValue visitBuildInIdentifierFunctionCall(TLParser.BuildInIdentifierFunctionCallContext ctx) {
-        List<TLParser.ExpressionContext> params = ctx.exprList() != null ? ctx.exprList().expression() : new ArrayList<TLParser.ExpressionContext>();
+    public TLValue visitBuildInIdentifierFunctionCall(WhisperLanguageParser.BuildInIdentifierFunctionCallContext ctx) {
+        List<WhisperLanguageParser.ExpressionContext> params = ctx.exprList() != null ? ctx.exprList().expression() : new ArrayList<WhisperLanguageParser.ExpressionContext>();
         String id = ctx.BuildIdentifier().getText();
         BuildInFunction function;
         if ((function = buildFunction.get(id)) != null) {
             List<TLValue> args = new ArrayList<>(params.size());
-            for (TLParser.ExpressionContext param : params) {
+            for (WhisperLanguageParser.ExpressionContext param : params) {
                 args.add(this.visit(param));
             }
             return function.invoke(args);
@@ -531,15 +533,15 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // Identifier '(' exprList? ')' #identifierFunctionCall
     @Override
-    public TLValue visitIdentifierFunctionCall(TLParser.IdentifierFunctionCallContext ctx) {
+    public TLValue visitIdentifierFunctionCall(WhisperLanguageParser.IdentifierFunctionCallContext ctx) {
 
-        List<TLParser.ExpressionContext> params = ctx.exprList() != null ? ctx.exprList().expression() : new ArrayList<TLParser.ExpressionContext>();
+        List<WhisperLanguageParser.ExpressionContext> params = ctx.exprList() != null ? ctx.exprList().expression() : new ArrayList<WhisperLanguageParser.ExpressionContext>();
         String id = ctx.Identifier().getText() + params.size();
         Function function;
 
         if ((function = functions.get(id)) != null) {
             List<TLValue> args = new ArrayList<>(params.size());
-            for (TLParser.ExpressionContext param : params) {
+            for (WhisperLanguageParser.ExpressionContext param : params) {
                 args.add(this.visit(param));
             }
             return function.invoke(args, functions, buildFunction);
@@ -551,7 +553,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // Println '(' expression? ')'  #printlnFunctionCall
     @Override
-    public TLValue visitPrintlnFunctionCall(TLParser.PrintlnFunctionCallContext ctx) {
+    public TLValue visitPrintlnFunctionCall(WhisperLanguageParser.PrintlnFunctionCallContext ctx) {
         if (ctx.expression() != null) {
             System.out.println(this.visit(ctx.expression()));
         } else {
@@ -562,14 +564,14 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // Print '(' expression ')'     #printFunctionCall
     @Override
-    public TLValue visitPrintFunctionCall(TLParser.PrintFunctionCallContext ctx) {
+    public TLValue visitPrintFunctionCall(WhisperLanguageParser.PrintFunctionCallContext ctx) {
         System.out.print(this.visit(ctx.expression()));
         return TLValue.VOID;
     }
 
     // Assert '(' expression ')'    #assertFunctionCall
     @Override
-    public TLValue visitAssertFunctionCall(TLParser.AssertFunctionCallContext ctx) {
+    public TLValue visitAssertFunctionCall(WhisperLanguageParser.AssertFunctionCallContext ctx) {
         TLValue value = this.visit(ctx.expression());
 
         if (!value.isBoolean()) {
@@ -586,7 +588,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
 
     // Size '(' expression ')'      #sizeFunctionCall
     @Override
-    public TLValue visitSizeFunctionCall(TLParser.SizeFunctionCallContext ctx) {
+    public TLValue visitSizeFunctionCall(WhisperLanguageParser.SizeFunctionCallContext ctx) {
         TLValue value = this.visit(ctx.expression());
 
         if (value.isString()) {
@@ -616,7 +618,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
     //  : Else Do block
     //  ;
     @Override
-    public TLValue visitIfStatement(TLParser.IfStatementContext ctx) {
+    public TLValue visitIfStatement(WhisperLanguageParser.IfStatementContext ctx) {
 
         // if ...
         if (this.visit(ctx.ifStat().expression()).asBoolean()) {
@@ -642,16 +644,16 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
     // : (statement | functionDecl)* (Return expression)?
     // ;
     @Override
-    public TLValue visitBlock(TLParser.BlockContext ctx) {
+    public TLValue visitBlock(WhisperLanguageParser.BlockContext ctx) {
 
         scope = new Scope(scope, false); // create new local scope
-        for (TLParser.FunctionDeclContext fdx : ctx.functionDecl()) {
+        for (WhisperLanguageParser.FunctionDeclContext fdx : ctx.functionDecl()) {
             this.visit(fdx);
         }
-        for (TLParser.StatementContext sx : ctx.statement()) {
+        for (WhisperLanguageParser.StatementContext sx : ctx.statement()) {
             this.visit(sx);
         }
-        TLParser.ExpressionContext ex;
+        WhisperLanguageParser.ExpressionContext ex;
         if ((ex = ctx.expression()) != null) {
             returnValue.value = this.visit(ex);
             scope = scope.parent();
@@ -665,7 +667,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
     // : For Identifier '=' expression To expression OBrace block CBrace
     // ;
     @Override
-    public TLValue visitForStatement(TLParser.ForStatementContext ctx) {
+    public TLValue visitForStatement(WhisperLanguageParser.ForStatementContext ctx) {
         int start = this.visit(ctx.expression(0)).asDouble().intValue();
         int stop = this.visit(ctx.expression(1)).asDouble().intValue();
         for (int i = start; i <= stop; i++) {
@@ -682,7 +684,7 @@ public class EvalVisitor extends TLBaseVisitor<TLValue> {
     // : While expression OBrace block CBrace
     // ;
     @Override
-    public TLValue visitWhileStatement(TLParser.WhileStatementContext ctx) {
+    public TLValue visitWhileStatement(WhisperLanguageParser.WhileStatementContext ctx) {
         while (this.visit(ctx.expression()).asBoolean()) {
             TLValue returnValue = this.visit(ctx.block());
             if (returnValue != TLValue.VOID) {

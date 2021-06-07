@@ -1,60 +1,72 @@
-// Generated from D:/private/tiny-language-antlr4\TL.g4 by ANTLR 4.9.1
+// Generated from ../whisper-grammar/WhisperLanguage.g4 by ANTLR 4.9.2
 package net.crtrpt.whisper.gen;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class TLParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.9.1", RuntimeMetaData.VERSION); }
+public class WhisperLanguageParser extends Parser {
+	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		Println=1, Print=2, Input=3, Assert=4, Size=5, Def=6, If=7, Else=8, Return=9, 
-		For=10, While=11, To=12, Do=13, End=14, In=15, Null=16, Or=17, And=18, 
-		Equals=19, NEquals=20, GTEquals=21, LTEquals=22, Pow=23, Excl=24, GT=25, 
-		LT=26, Add=27, Subtract=28, Multiply=29, Divide=30, Modulus=31, OBrace=32, 
-		CBrace=33, OBracket=34, CBracket=35, OParen=36, CParen=37, SColon=38, 
-		Assign=39, Comma=40, QMark=41, Colon=42, Bool=43, Number=44, BuildIdentifier=45, 
-		Identifier=46, String=47, Comment=48, Space=49;
+		T__0=1, Println=2, Print=3, Input=4, Assert=5, Size=6, Def=7, If=8, Else=9, 
+		Return=10, For=11, While=12, To=13, Do=14, End=15, In=16, Null=17, LABEL_Alias=18, 
+		GOTO_Alias=19, JUMP_Alias=20, IMPORT_Alias=21, INCLUDE_Alias=22, Modulus_Alias=23, 
+		Class_Alias=24, INTERFACE_Alias=25, EXTEND_Alias=26, BitwiseAnd=27, BitwiseOr=28, 
+		BitwiseNot=29, BitwiseNegationOperator=30, LeftShiftOperator=31, RightShiftOperator=32, 
+		Or=33, And=34, Equals=35, NEquals=36, GTEquals=37, LTEquals=38, Excl=39, 
+		GT=40, LT=41, Add=42, Subtract=43, Multiply=44, Divide=45, Modulus=46, 
+		OBrace=47, CBrace=48, OBracket=49, CBracket=50, OParen=51, CParen=52, 
+		SColon=53, Assign=54, Comma=55, QMark=56, Colon=57, Bool=58, Number=59, 
+		BuildIdentifier=60, Identifier=61, String_Alias=62, Comment=63, Space=64;
 	public static final int
 		RULE_parse = 0, RULE_block = 1, RULE_statement = 2, RULE_assignment = 3, 
 		RULE_functionCall = 4, RULE_ifStatement = 5, RULE_ifStat = 6, RULE_elseIfStat = 7, 
 		RULE_elseStat = 8, RULE_functionDecl = 9, RULE_forStatement = 10, RULE_whileStatement = 11, 
-		RULE_idList = 12, RULE_exprList = 13, RULE_expression = 14, RULE_list = 15, 
+		RULE_idList = 12, RULE_exprList = 13, RULE_expression = 14, RULE_list_Alias = 15, 
 		RULE_indexes = 16;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"parse", "block", "statement", "assignment", "functionCall", "ifStatement", 
 			"ifStat", "elseIfStat", "elseStat", "functionDecl", "forStatement", "whileStatement", 
-			"idList", "exprList", "expression", "list", "indexes"
+			"idList", "exprList", "expression", "list_Alias", "indexes"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'println'", "'print'", "'input'", "'assert'", "'size'", "'func'", 
-			"'if'", "'else'", "'return'", "'for'", "'while'", "'to'", "'do'", "'end'", 
-			"'in'", "'null'", "'||'", "'&&'", "'=='", "'!='", "'>='", "'<='", "'^'", 
-			"'!'", "'>'", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "'{'", "'}'", 
-			"'['", "']'", "'('", "')'", "';'", "'='", "','", "'?'", "':'"
+			null, "'**'", "'println'", "'print'", "'input'", "'assert'", "'size'", 
+			"'func'", "'if'", "'else'", "'return'", "'for'", "'while'", "'to'", "'do'", 
+			"'end'", "'in'", "'null'", "'label'", "'goto'", "'jump'", "'import'", 
+			"'include'", "'modulue'", "'class'", "'interface'", "'extend'", "'&'", 
+			"'|'", "'^'", "'~'", "'>>'", "'<<'", "'||'", "'&&'", "'=='", "'!='", 
+			"'>='", "'<='", "'!'", "'>'", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", 
+			"'{'", "'}'", "'['", "']'", "'('", "')'", "';'", "'='", "','", "'?'", 
+			"':'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "Println", "Print", "Input", "Assert", "Size", "Def", "If", "Else", 
-			"Return", "For", "While", "To", "Do", "End", "In", "Null", "Or", "And", 
-			"Equals", "NEquals", "GTEquals", "LTEquals", "Pow", "Excl", "GT", "LT", 
-			"Add", "Subtract", "Multiply", "Divide", "Modulus", "OBrace", "CBrace", 
+			null, null, "Println", "Print", "Input", "Assert", "Size", "Def", "If", 
+			"Else", "Return", "For", "While", "To", "Do", "End", "In", "Null", "LABEL_Alias", 
+			"GOTO_Alias", "JUMP_Alias", "IMPORT_Alias", "INCLUDE_Alias", "Modulus_Alias", 
+			"Class_Alias", "INTERFACE_Alias", "EXTEND_Alias", "BitwiseAnd", "BitwiseOr", 
+			"BitwiseNot", "BitwiseNegationOperator", "LeftShiftOperator", "RightShiftOperator", 
+			"Or", "And", "Equals", "NEquals", "GTEquals", "LTEquals", "Excl", "GT", 
+			"LT", "Add", "Subtract", "Multiply", "Divide", "Modulus", "OBrace", "CBrace", 
 			"OBracket", "CBracket", "OParen", "CParen", "SColon", "Assign", "Comma", 
 			"QMark", "Colon", "Bool", "Number", "BuildIdentifier", "Identifier", 
-			"String", "Comment", "Space"
+			"String_Alias", "Comment", "Space"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -92,7 +104,7 @@ public class TLParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "TL.g4"; }
+	public String getGrammarFileName() { return "WhisperLanguage.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -103,13 +115,13 @@ public class TLParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public TLParser(TokenStream input) {
+	public WhisperLanguageParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	public static class ParseContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(TLParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(WhisperLanguageParser.EOF, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
@@ -121,16 +133,8 @@ public class TLParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_parse; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterParse(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitParse(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitParse(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitParse(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -185,26 +189,18 @@ public class TLParser extends Parser {
 		public FunctionDeclContext functionDecl(int i) {
 			return getRuleContext(FunctionDeclContext.class,i);
 		}
-		public TerminalNode Return() { return getToken(TLParser.Return, 0); }
+		public TerminalNode Return() { return getToken(WhisperLanguageParser.Return, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode SColon() { return getToken(TLParser.SColon, 0); }
+		public TerminalNode SColon() { return getToken(WhisperLanguageParser.SColon, 0); }
 		public BlockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_block; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterBlock(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitBlock(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitBlock(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -283,7 +279,7 @@ public class TLParser extends Parser {
 		public AssignmentContext assignment() {
 			return getRuleContext(AssignmentContext.class,0);
 		}
-		public TerminalNode SColon() { return getToken(TLParser.SColon, 0); }
+		public TerminalNode SColon() { return getToken(WhisperLanguageParser.SColon, 0); }
 		public FunctionCallContext functionCall() {
 			return getRuleContext(FunctionCallContext.class,0);
 		}
@@ -301,16 +297,8 @@ public class TLParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_statement; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitStatement(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitStatement(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -375,8 +363,8 @@ public class TLParser extends Parser {
 	}
 
 	public static class AssignmentContext extends ParserRuleContext {
-		public TerminalNode Identifier() { return getToken(TLParser.Identifier, 0); }
-		public TerminalNode Assign() { return getToken(TLParser.Assign, 0); }
+		public TerminalNode Identifier() { return getToken(WhisperLanguageParser.Identifier, 0); }
+		public TerminalNode Assign() { return getToken(WhisperLanguageParser.Assign, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -388,16 +376,8 @@ public class TLParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_assignment; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterAssignment(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitAssignment(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitAssignment(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitAssignment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -450,134 +430,86 @@ public class TLParser extends Parser {
 		}
 	}
 	public static class AssertFunctionCallContext extends FunctionCallContext {
-		public TerminalNode Assert() { return getToken(TLParser.Assert, 0); }
-		public TerminalNode OParen() { return getToken(TLParser.OParen, 0); }
+		public TerminalNode Assert() { return getToken(WhisperLanguageParser.Assert, 0); }
+		public TerminalNode OParen() { return getToken(WhisperLanguageParser.OParen, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode CParen() { return getToken(TLParser.CParen, 0); }
+		public TerminalNode CParen() { return getToken(WhisperLanguageParser.CParen, 0); }
 		public AssertFunctionCallContext(FunctionCallContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterAssertFunctionCall(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitAssertFunctionCall(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitAssertFunctionCall(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitAssertFunctionCall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class SizeFunctionCallContext extends FunctionCallContext {
-		public TerminalNode Size() { return getToken(TLParser.Size, 0); }
-		public TerminalNode OParen() { return getToken(TLParser.OParen, 0); }
+		public TerminalNode Size() { return getToken(WhisperLanguageParser.Size, 0); }
+		public TerminalNode OParen() { return getToken(WhisperLanguageParser.OParen, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode CParen() { return getToken(TLParser.CParen, 0); }
+		public TerminalNode CParen() { return getToken(WhisperLanguageParser.CParen, 0); }
 		public SizeFunctionCallContext(FunctionCallContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterSizeFunctionCall(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitSizeFunctionCall(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitSizeFunctionCall(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitSizeFunctionCall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class PrintlnFunctionCallContext extends FunctionCallContext {
-		public TerminalNode Println() { return getToken(TLParser.Println, 0); }
-		public TerminalNode OParen() { return getToken(TLParser.OParen, 0); }
-		public TerminalNode CParen() { return getToken(TLParser.CParen, 0); }
+		public TerminalNode Println() { return getToken(WhisperLanguageParser.Println, 0); }
+		public TerminalNode OParen() { return getToken(WhisperLanguageParser.OParen, 0); }
+		public TerminalNode CParen() { return getToken(WhisperLanguageParser.CParen, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public PrintlnFunctionCallContext(FunctionCallContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterPrintlnFunctionCall(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitPrintlnFunctionCall(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitPrintlnFunctionCall(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitPrintlnFunctionCall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class BuildInIdentifierFunctionCallContext extends FunctionCallContext {
-		public TerminalNode BuildIdentifier() { return getToken(TLParser.BuildIdentifier, 0); }
-		public TerminalNode OParen() { return getToken(TLParser.OParen, 0); }
-		public TerminalNode CParen() { return getToken(TLParser.CParen, 0); }
+		public TerminalNode BuildIdentifier() { return getToken(WhisperLanguageParser.BuildIdentifier, 0); }
+		public TerminalNode OParen() { return getToken(WhisperLanguageParser.OParen, 0); }
+		public TerminalNode CParen() { return getToken(WhisperLanguageParser.CParen, 0); }
 		public ExprListContext exprList() {
 			return getRuleContext(ExprListContext.class,0);
 		}
 		public BuildInIdentifierFunctionCallContext(FunctionCallContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterBuildInIdentifierFunctionCall(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitBuildInIdentifierFunctionCall(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitBuildInIdentifierFunctionCall(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitBuildInIdentifierFunctionCall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class IdentifierFunctionCallContext extends FunctionCallContext {
-		public TerminalNode Identifier() { return getToken(TLParser.Identifier, 0); }
-		public TerminalNode OParen() { return getToken(TLParser.OParen, 0); }
-		public TerminalNode CParen() { return getToken(TLParser.CParen, 0); }
+		public TerminalNode Identifier() { return getToken(WhisperLanguageParser.Identifier, 0); }
+		public TerminalNode OParen() { return getToken(WhisperLanguageParser.OParen, 0); }
+		public TerminalNode CParen() { return getToken(WhisperLanguageParser.CParen, 0); }
 		public ExprListContext exprList() {
 			return getRuleContext(ExprListContext.class,0);
 		}
 		public IdentifierFunctionCallContext(FunctionCallContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterIdentifierFunctionCall(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitIdentifierFunctionCall(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitIdentifierFunctionCall(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitIdentifierFunctionCall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class PrintFunctionCallContext extends FunctionCallContext {
-		public TerminalNode Print() { return getToken(TLParser.Print, 0); }
-		public TerminalNode OParen() { return getToken(TLParser.OParen, 0); }
+		public TerminalNode Print() { return getToken(WhisperLanguageParser.Print, 0); }
+		public TerminalNode OParen() { return getToken(WhisperLanguageParser.OParen, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode CParen() { return getToken(TLParser.CParen, 0); }
+		public TerminalNode CParen() { return getToken(WhisperLanguageParser.CParen, 0); }
 		public PrintFunctionCallContext(FunctionCallContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterPrintFunctionCall(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitPrintFunctionCall(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitPrintFunctionCall(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitPrintFunctionCall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -601,7 +533,7 @@ public class TLParser extends Parser {
 				setState(74);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Println) | (1L << Print) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Null) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << BuildIdentifier) | (1L << Identifier) | (1L << String))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Println) | (1L << Print) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Null) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << BuildIdentifier) | (1L << Identifier) | (1L << String_Alias))) != 0)) {
 					{
 					setState(73);
 					exprList();
@@ -623,7 +555,7 @@ public class TLParser extends Parser {
 				setState(80);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Println) | (1L << Print) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Null) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << BuildIdentifier) | (1L << Identifier) | (1L << String))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Println) | (1L << Print) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Null) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << BuildIdentifier) | (1L << Identifier) | (1L << String_Alias))) != 0)) {
 					{
 					setState(79);
 					exprList();
@@ -645,7 +577,7 @@ public class TLParser extends Parser {
 				setState(86);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Println) | (1L << Print) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Null) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << BuildIdentifier) | (1L << Identifier) | (1L << String))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Println) | (1L << Print) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Null) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << BuildIdentifier) | (1L << Identifier) | (1L << String_Alias))) != 0)) {
 					{
 					setState(85);
 					expression(0);
@@ -731,16 +663,8 @@ public class TLParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_ifStatement; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterIfStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitIfStatement(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitIfStatement(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitIfStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -795,30 +719,22 @@ public class TLParser extends Parser {
 	}
 
 	public static class IfStatContext extends ParserRuleContext {
-		public TerminalNode If() { return getToken(TLParser.If, 0); }
+		public TerminalNode If() { return getToken(WhisperLanguageParser.If, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode OBrace() { return getToken(TLParser.OBrace, 0); }
+		public TerminalNode OBrace() { return getToken(WhisperLanguageParser.OBrace, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
-		public TerminalNode CBrace() { return getToken(TLParser.CBrace, 0); }
+		public TerminalNode CBrace() { return getToken(WhisperLanguageParser.CBrace, 0); }
 		public IfStatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ifStat; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterIfStat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitIfStat(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitIfStat(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitIfStat(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -853,31 +769,23 @@ public class TLParser extends Parser {
 	}
 
 	public static class ElseIfStatContext extends ParserRuleContext {
-		public TerminalNode Else() { return getToken(TLParser.Else, 0); }
-		public TerminalNode If() { return getToken(TLParser.If, 0); }
+		public TerminalNode Else() { return getToken(WhisperLanguageParser.Else, 0); }
+		public TerminalNode If() { return getToken(WhisperLanguageParser.If, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode OBrace() { return getToken(TLParser.OBrace, 0); }
+		public TerminalNode OBrace() { return getToken(WhisperLanguageParser.OBrace, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
-		public TerminalNode CBrace() { return getToken(TLParser.CBrace, 0); }
+		public TerminalNode CBrace() { return getToken(WhisperLanguageParser.CBrace, 0); }
 		public ElseIfStatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elseIfStat; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterElseIfStat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitElseIfStat(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitElseIfStat(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitElseIfStat(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -914,27 +822,19 @@ public class TLParser extends Parser {
 	}
 
 	public static class ElseStatContext extends ParserRuleContext {
-		public TerminalNode Else() { return getToken(TLParser.Else, 0); }
-		public TerminalNode OBrace() { return getToken(TLParser.OBrace, 0); }
+		public TerminalNode Else() { return getToken(WhisperLanguageParser.Else, 0); }
+		public TerminalNode OBrace() { return getToken(WhisperLanguageParser.OBrace, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
-		public TerminalNode CBrace() { return getToken(TLParser.CBrace, 0); }
+		public TerminalNode CBrace() { return getToken(WhisperLanguageParser.CBrace, 0); }
 		public ElseStatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elseStat; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterElseStat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitElseStat(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitElseStat(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitElseStat(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -967,15 +867,15 @@ public class TLParser extends Parser {
 	}
 
 	public static class FunctionDeclContext extends ParserRuleContext {
-		public TerminalNode Def() { return getToken(TLParser.Def, 0); }
-		public TerminalNode Identifier() { return getToken(TLParser.Identifier, 0); }
-		public TerminalNode OParen() { return getToken(TLParser.OParen, 0); }
-		public TerminalNode CParen() { return getToken(TLParser.CParen, 0); }
-		public TerminalNode OBrace() { return getToken(TLParser.OBrace, 0); }
+		public TerminalNode Def() { return getToken(WhisperLanguageParser.Def, 0); }
+		public TerminalNode Identifier() { return getToken(WhisperLanguageParser.Identifier, 0); }
+		public TerminalNode OParen() { return getToken(WhisperLanguageParser.OParen, 0); }
+		public TerminalNode CParen() { return getToken(WhisperLanguageParser.CParen, 0); }
+		public TerminalNode OBrace() { return getToken(WhisperLanguageParser.OBrace, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
-		public TerminalNode CBrace() { return getToken(TLParser.CBrace, 0); }
+		public TerminalNode CBrace() { return getToken(WhisperLanguageParser.CBrace, 0); }
 		public IdListContext idList() {
 			return getRuleContext(IdListContext.class,0);
 		}
@@ -984,16 +884,8 @@ public class TLParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_functionDecl; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterFunctionDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitFunctionDecl(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitFunctionDecl(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitFunctionDecl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1043,36 +935,28 @@ public class TLParser extends Parser {
 	}
 
 	public static class ForStatementContext extends ParserRuleContext {
-		public TerminalNode For() { return getToken(TLParser.For, 0); }
-		public TerminalNode Identifier() { return getToken(TLParser.Identifier, 0); }
-		public TerminalNode Assign() { return getToken(TLParser.Assign, 0); }
+		public TerminalNode For() { return getToken(WhisperLanguageParser.For, 0); }
+		public TerminalNode Identifier() { return getToken(WhisperLanguageParser.Identifier, 0); }
+		public TerminalNode Assign() { return getToken(WhisperLanguageParser.Assign, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode To() { return getToken(TLParser.To, 0); }
-		public TerminalNode OBrace() { return getToken(TLParser.OBrace, 0); }
+		public TerminalNode To() { return getToken(WhisperLanguageParser.To, 0); }
+		public TerminalNode OBrace() { return getToken(WhisperLanguageParser.OBrace, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
-		public TerminalNode CBrace() { return getToken(TLParser.CBrace, 0); }
+		public TerminalNode CBrace() { return getToken(WhisperLanguageParser.CBrace, 0); }
 		public ForStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_forStatement; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterForStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitForStatement(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitForStatement(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitForStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1115,30 +999,22 @@ public class TLParser extends Parser {
 	}
 
 	public static class WhileStatementContext extends ParserRuleContext {
-		public TerminalNode While() { return getToken(TLParser.While, 0); }
+		public TerminalNode While() { return getToken(WhisperLanguageParser.While, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode OBrace() { return getToken(TLParser.OBrace, 0); }
+		public TerminalNode OBrace() { return getToken(WhisperLanguageParser.OBrace, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
-		public TerminalNode CBrace() { return getToken(TLParser.CBrace, 0); }
+		public TerminalNode CBrace() { return getToken(WhisperLanguageParser.CBrace, 0); }
 		public WhileStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_whileStatement; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterWhileStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitWhileStatement(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitWhileStatement(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitWhileStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1173,29 +1049,21 @@ public class TLParser extends Parser {
 	}
 
 	public static class IdListContext extends ParserRuleContext {
-		public List<TerminalNode> Identifier() { return getTokens(TLParser.Identifier); }
+		public List<TerminalNode> Identifier() { return getTokens(WhisperLanguageParser.Identifier); }
 		public TerminalNode Identifier(int i) {
-			return getToken(TLParser.Identifier, i);
+			return getToken(WhisperLanguageParser.Identifier, i);
 		}
-		public List<TerminalNode> Comma() { return getTokens(TLParser.Comma); }
+		public List<TerminalNode> Comma() { return getTokens(WhisperLanguageParser.Comma); }
 		public TerminalNode Comma(int i) {
-			return getToken(TLParser.Comma, i);
+			return getToken(WhisperLanguageParser.Comma, i);
 		}
 		public IdListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_idList; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterIdList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitIdList(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitIdList(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitIdList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1245,25 +1113,17 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> Comma() { return getTokens(TLParser.Comma); }
+		public List<TerminalNode> Comma() { return getTokens(WhisperLanguageParser.Comma); }
 		public TerminalNode Comma(int i) {
-			return getToken(TLParser.Comma, i);
+			return getToken(WhisperLanguageParser.Comma, i);
 		}
 		public ExprListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprList; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterExprList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitExprList(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitExprList(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitExprList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1318,76 +1178,44 @@ public class TLParser extends Parser {
 		}
 	}
 	public static class BoolExpressionContext extends ExpressionContext {
-		public TerminalNode Bool() { return getToken(TLParser.Bool, 0); }
+		public TerminalNode Bool() { return getToken(WhisperLanguageParser.Bool, 0); }
 		public BoolExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterBoolExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitBoolExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitBoolExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitBoolExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NumberExpressionContext extends ExpressionContext {
-		public TerminalNode Number() { return getToken(TLParser.Number, 0); }
+		public TerminalNode Number() { return getToken(WhisperLanguageParser.Number, 0); }
 		public NumberExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterNumberExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitNumberExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitNumberExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitNumberExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class IdentifierExpressionContext extends ExpressionContext {
-		public TerminalNode Identifier() { return getToken(TLParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(WhisperLanguageParser.Identifier, 0); }
 		public IndexesContext indexes() {
 			return getRuleContext(IndexesContext.class,0);
 		}
 		public IdentifierExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterIdentifierExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitIdentifierExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitIdentifierExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitIdentifierExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NotExpressionContext extends ExpressionContext {
-		public TerminalNode Excl() { return getToken(TLParser.Excl, 0); }
+		public TerminalNode Excl() { return getToken(WhisperLanguageParser.Excl, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public NotExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterNotExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitNotExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitNotExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitNotExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1398,39 +1226,23 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode Or() { return getToken(TLParser.Or, 0); }
+		public TerminalNode Or() { return getToken(WhisperLanguageParser.Or, 0); }
 		public OrExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterOrExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitOrExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitOrExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitOrExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class UnaryMinusExpressionContext extends ExpressionContext {
-		public TerminalNode Subtract() { return getToken(TLParser.Subtract, 0); }
+		public TerminalNode Subtract() { return getToken(WhisperLanguageParser.Subtract, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public UnaryMinusExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterUnaryMinusExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitUnaryMinusExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitUnaryMinusExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitUnaryMinusExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1441,19 +1253,10 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode Pow() { return getToken(TLParser.Pow, 0); }
 		public PowerExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterPowerExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitPowerExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitPowerExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitPowerExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1465,20 +1268,12 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode Equals() { return getToken(TLParser.Equals, 0); }
-		public TerminalNode NEquals() { return getToken(TLParser.NEquals, 0); }
+		public TerminalNode Equals() { return getToken(WhisperLanguageParser.Equals, 0); }
+		public TerminalNode NEquals() { return getToken(WhisperLanguageParser.NEquals, 0); }
 		public EqExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterEqExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitEqExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitEqExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitEqExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1489,19 +1284,11 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode And() { return getToken(TLParser.And, 0); }
+		public TerminalNode And() { return getToken(WhisperLanguageParser.And, 0); }
 		public AndExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterAndExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitAndExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitAndExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitAndExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1512,63 +1299,39 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode In() { return getToken(TLParser.In, 0); }
+		public TerminalNode In() { return getToken(WhisperLanguageParser.In, 0); }
 		public InExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterInExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitInExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitInExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class StringExpressionContext extends ExpressionContext {
-		public TerminalNode String() { return getToken(TLParser.String, 0); }
+		public TerminalNode String_Alias() { return getToken(WhisperLanguageParser.String_Alias, 0); }
 		public IndexesContext indexes() {
 			return getRuleContext(IndexesContext.class,0);
 		}
 		public StringExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterStringExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitStringExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitStringExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitStringExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ExpressionExpressionContext extends ExpressionContext {
-		public TerminalNode OParen() { return getToken(TLParser.OParen, 0); }
+		public TerminalNode OParen() { return getToken(WhisperLanguageParser.OParen, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode CParen() { return getToken(TLParser.CParen, 0); }
+		public TerminalNode CParen() { return getToken(WhisperLanguageParser.CParen, 0); }
 		public IndexesContext indexes() {
 			return getRuleContext(IndexesContext.class,0);
 		}
 		public ExpressionExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterExpressionExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitExpressionExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitExpressionExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitExpressionExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1580,20 +1343,12 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode Add() { return getToken(TLParser.Add, 0); }
-		public TerminalNode Subtract() { return getToken(TLParser.Subtract, 0); }
+		public TerminalNode Add() { return getToken(WhisperLanguageParser.Add, 0); }
+		public TerminalNode Subtract() { return getToken(WhisperLanguageParser.Subtract, 0); }
 		public AddExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterAddExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitAddExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitAddExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitAddExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1605,39 +1360,23 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode GTEquals() { return getToken(TLParser.GTEquals, 0); }
-		public TerminalNode LTEquals() { return getToken(TLParser.LTEquals, 0); }
-		public TerminalNode GT() { return getToken(TLParser.GT, 0); }
-		public TerminalNode LT() { return getToken(TLParser.LT, 0); }
+		public TerminalNode GTEquals() { return getToken(WhisperLanguageParser.GTEquals, 0); }
+		public TerminalNode LTEquals() { return getToken(WhisperLanguageParser.LTEquals, 0); }
+		public TerminalNode GT() { return getToken(WhisperLanguageParser.GT, 0); }
+		public TerminalNode LT() { return getToken(WhisperLanguageParser.LT, 0); }
 		public CompExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterCompExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitCompExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitCompExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitCompExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NullExpressionContext extends ExpressionContext {
-		public TerminalNode Null() { return getToken(TLParser.Null, 0); }
+		public TerminalNode Null() { return getToken(WhisperLanguageParser.Null, 0); }
 		public NullExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterNullExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitNullExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitNullExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitNullExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1650,16 +1389,8 @@ public class TLParser extends Parser {
 		}
 		public FunctionCallExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterFunctionCallExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitFunctionCallExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitFunctionCallExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitFunctionCallExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1671,43 +1402,27 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode Multiply() { return getToken(TLParser.Multiply, 0); }
-		public TerminalNode Divide() { return getToken(TLParser.Divide, 0); }
-		public TerminalNode Modulus() { return getToken(TLParser.Modulus, 0); }
+		public TerminalNode Multiply() { return getToken(WhisperLanguageParser.Multiply, 0); }
+		public TerminalNode Divide() { return getToken(WhisperLanguageParser.Divide, 0); }
+		public TerminalNode Modulus() { return getToken(WhisperLanguageParser.Modulus, 0); }
 		public MultExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterMultExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitMultExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitMultExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitMultExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ListExpressionContext extends ExpressionContext {
-		public ListContext list() {
-			return getRuleContext(ListContext.class,0);
+		public List_AliasContext list_Alias() {
+			return getRuleContext(List_AliasContext.class,0);
 		}
 		public IndexesContext indexes() {
 			return getRuleContext(IndexesContext.class,0);
 		}
 		public ListExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterListExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitListExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitListExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitListExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1718,40 +1433,24 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode QMark() { return getToken(TLParser.QMark, 0); }
-		public TerminalNode Colon() { return getToken(TLParser.Colon, 0); }
+		public TerminalNode QMark() { return getToken(WhisperLanguageParser.QMark, 0); }
+		public TerminalNode Colon() { return getToken(WhisperLanguageParser.Colon, 0); }
 		public TernaryExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterTernaryExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitTernaryExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitTernaryExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitTernaryExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class InputExpressionContext extends ExpressionContext {
-		public TerminalNode Input() { return getToken(TLParser.Input, 0); }
-		public TerminalNode OParen() { return getToken(TLParser.OParen, 0); }
-		public TerminalNode CParen() { return getToken(TLParser.CParen, 0); }
-		public TerminalNode String() { return getToken(TLParser.String, 0); }
+		public TerminalNode Input() { return getToken(WhisperLanguageParser.Input, 0); }
+		public TerminalNode OParen() { return getToken(WhisperLanguageParser.OParen, 0); }
+		public TerminalNode CParen() { return getToken(WhisperLanguageParser.CParen, 0); }
+		public TerminalNode String_Alias() { return getToken(WhisperLanguageParser.String_Alias, 0); }
 		public InputExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterInputExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitInputExpression(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitInputExpression(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitInputExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1850,7 +1549,7 @@ public class TLParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(189);
-				list();
+				list_Alias();
 				setState(191);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
@@ -1888,7 +1587,7 @@ public class TLParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(197);
-				match(String);
+				match(String_Alias);
 				setState(199);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
@@ -1936,10 +1635,10 @@ public class TLParser extends Parser {
 				setState(210);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if (_la==String) {
+				if (_la==String_Alias) {
 					{
 					setState(209);
-					match(String);
+					match(String_Alias);
 					}
 				}
 
@@ -1967,7 +1666,7 @@ public class TLParser extends Parser {
 						setState(215);
 						if (!(precpred(_ctx, 18))) throw new FailedPredicateException(this, "precpred(_ctx, 18)");
 						setState(216);
-						match(Pow);
+						match(T__0);
 						setState(217);
 						expression(18);
 						}
@@ -2128,34 +1827,26 @@ public class TLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ListContext extends ParserRuleContext {
-		public TerminalNode OBracket() { return getToken(TLParser.OBracket, 0); }
-		public TerminalNode CBracket() { return getToken(TLParser.CBracket, 0); }
+	public static class List_AliasContext extends ParserRuleContext {
+		public TerminalNode OBracket() { return getToken(WhisperLanguageParser.OBracket, 0); }
+		public TerminalNode CBracket() { return getToken(WhisperLanguageParser.CBracket, 0); }
 		public ExprListContext exprList() {
 			return getRuleContext(ExprListContext.class,0);
 		}
-		public ListContext(ParserRuleContext parent, int invokingState) {
+		public List_AliasContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_list; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitList(this);
-		}
+		@Override public int getRuleIndex() { return RULE_list_Alias; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitList(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitList_Alias(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ListContext list() throws RecognitionException {
-		ListContext _localctx = new ListContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_list);
+	public final List_AliasContext list_Alias() throws RecognitionException {
+		List_AliasContext _localctx = new List_AliasContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_list_Alias);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -2165,7 +1856,7 @@ public class TLParser extends Parser {
 			setState(252);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Println) | (1L << Print) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Null) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << BuildIdentifier) | (1L << Identifier) | (1L << String))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Println) | (1L << Print) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Null) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << BuildIdentifier) | (1L << Identifier) | (1L << String_Alias))) != 0)) {
 				{
 				setState(251);
 				exprList();
@@ -2188,9 +1879,9 @@ public class TLParser extends Parser {
 	}
 
 	public static class IndexesContext extends ParserRuleContext {
-		public List<TerminalNode> OBracket() { return getTokens(TLParser.OBracket); }
+		public List<TerminalNode> OBracket() { return getTokens(WhisperLanguageParser.OBracket); }
 		public TerminalNode OBracket(int i) {
-			return getToken(TLParser.OBracket, i);
+			return getToken(WhisperLanguageParser.OBracket, i);
 		}
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
@@ -2198,25 +1889,17 @@ public class TLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> CBracket() { return getTokens(TLParser.CBracket); }
+		public List<TerminalNode> CBracket() { return getTokens(WhisperLanguageParser.CBracket); }
 		public TerminalNode CBracket(int i) {
-			return getToken(TLParser.CBracket, i);
+			return getToken(WhisperLanguageParser.CBracket, i);
 		}
 		public IndexesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_indexes; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).enterIndexes(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLListener ) ((TLListener)listener).exitIndexes(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLVisitor ) return ((TLVisitor<? extends T>)visitor).visitIndexes(this);
+			if ( visitor instanceof WhisperLanguageVisitor ) return ((WhisperLanguageVisitor<? extends T>)visitor).visitIndexes(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2297,9 +1980,9 @@ public class TLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\63\u010b\4\2\t\2"+
-		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
-		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3B\u010b\4\2\t\2\4"+
+		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
+		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\3\2\3\2\5\2\'\n\2\3\2\3\2\3\3\3\3\7\3-\n\3\f\3\16\3\60\13\3\3\3\3\3\3"+
 		"\3\3\3\5\3\66\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4A\n\4\3\5\3\5"+
 		"\5\5E\n\5\3\5\3\5\3\5\3\6\3\6\3\6\5\6M\n\6\3\6\3\6\3\6\3\6\5\6S\n\6\3"+
@@ -2317,78 +2000,78 @@ public class TLParser extends Parser {
 		"\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\7\20\u00f8"+
 		"\n\20\f\20\16\20\u00fb\13\20\3\21\3\21\5\21\u00ff\n\21\3\21\3\21\3\22"+
 		"\3\22\3\22\3\22\6\22\u0107\n\22\r\22\16\22\u0108\3\22\2\3\36\23\2\4\6"+
-		"\b\n\f\16\20\22\24\26\30\32\34\36 \"\2\6\3\2\37!\3\2\35\36\4\2\27\30\33"+
-		"\34\3\2\25\26\2\u012a\2&\3\2\2\2\4.\3\2\2\2\6@\3\2\2\2\bB\3\2\2\2\nj\3"+
-		"\2\2\2\fl\3\2\2\2\16v\3\2\2\2\20|\3\2\2\2\22\u0083\3\2\2\2\24\u0088\3"+
-		"\2\2\2\26\u0093\3\2\2\2\30\u009d\3\2\2\2\32\u00a3\3\2\2\2\34\u00ab\3\2"+
-		"\2\2\36\u00d7\3\2\2\2 \u00fc\3\2\2\2\"\u0106\3\2\2\2$\'\5\4\3\2%\'\5\6"+
-		"\4\2&$\3\2\2\2&%\3\2\2\2\'(\3\2\2\2()\7\2\2\3)\3\3\2\2\2*-\5\6\4\2+-\5"+
-		"\24\13\2,*\3\2\2\2,+\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\65\3\2\2"+
-		"\2\60.\3\2\2\2\61\62\7\13\2\2\62\63\5\36\20\2\63\64\7(\2\2\64\66\3\2\2"+
-		"\2\65\61\3\2\2\2\65\66\3\2\2\2\66\5\3\2\2\2\678\5\b\5\289\7(\2\29A\3\2"+
-		"\2\2:;\5\n\6\2;<\7(\2\2<A\3\2\2\2=A\5\f\7\2>A\5\26\f\2?A\5\30\r\2@\67"+
-		"\3\2\2\2@:\3\2\2\2@=\3\2\2\2@>\3\2\2\2@?\3\2\2\2A\7\3\2\2\2BD\7\60\2\2"+
-		"CE\5\"\22\2DC\3\2\2\2DE\3\2\2\2EF\3\2\2\2FG\7)\2\2GH\5\36\20\2H\t\3\2"+
-		"\2\2IJ\7/\2\2JL\7&\2\2KM\5\34\17\2LK\3\2\2\2LM\3\2\2\2MN\3\2\2\2Nk\7\'"+
-		"\2\2OP\7\60\2\2PR\7&\2\2QS\5\34\17\2RQ\3\2\2\2RS\3\2\2\2ST\3\2\2\2Tk\7"+
-		"\'\2\2UV\7\3\2\2VX\7&\2\2WY\5\36\20\2XW\3\2\2\2XY\3\2\2\2YZ\3\2\2\2Zk"+
-		"\7\'\2\2[\\\7\4\2\2\\]\7&\2\2]^\5\36\20\2^_\7\'\2\2_k\3\2\2\2`a\7\6\2"+
-		"\2ab\7&\2\2bc\5\36\20\2cd\7\'\2\2dk\3\2\2\2ef\7\7\2\2fg\7&\2\2gh\5\36"+
-		"\20\2hi\7\'\2\2ik\3\2\2\2jI\3\2\2\2jO\3\2\2\2jU\3\2\2\2j[\3\2\2\2j`\3"+
-		"\2\2\2je\3\2\2\2k\13\3\2\2\2lp\5\16\b\2mo\5\20\t\2nm\3\2\2\2or\3\2\2\2"+
-		"pn\3\2\2\2pq\3\2\2\2qt\3\2\2\2rp\3\2\2\2su\5\22\n\2ts\3\2\2\2tu\3\2\2"+
-		"\2u\r\3\2\2\2vw\7\t\2\2wx\5\36\20\2xy\7\"\2\2yz\5\4\3\2z{\7#\2\2{\17\3"+
-		"\2\2\2|}\7\n\2\2}~\7\t\2\2~\177\5\36\20\2\177\u0080\7\"\2\2\u0080\u0081"+
-		"\5\4\3\2\u0081\u0082\7#\2\2\u0082\21\3\2\2\2\u0083\u0084\7\n\2\2\u0084"+
-		"\u0085\7\"\2\2\u0085\u0086\5\4\3\2\u0086\u0087\7#\2\2\u0087\23\3\2\2\2"+
-		"\u0088\u0089\7\b\2\2\u0089\u008a\7\60\2\2\u008a\u008c\7&\2\2\u008b\u008d"+
-		"\5\32\16\2\u008c\u008b\3\2\2\2\u008c\u008d\3\2\2\2\u008d\u008e\3\2\2\2"+
-		"\u008e\u008f\7\'\2\2\u008f\u0090\7\"\2\2\u0090\u0091\5\4\3\2\u0091\u0092"+
-		"\7#\2\2\u0092\25\3\2\2\2\u0093\u0094\7\f\2\2\u0094\u0095\7\60\2\2\u0095"+
-		"\u0096\7)\2\2\u0096\u0097\5\36\20\2\u0097\u0098\7\16\2\2\u0098\u0099\5"+
-		"\36\20\2\u0099\u009a\7\"\2\2\u009a\u009b\5\4\3\2\u009b\u009c\7#\2\2\u009c"+
-		"\27\3\2\2\2\u009d\u009e\7\r\2\2\u009e\u009f\5\36\20\2\u009f\u00a0\7\""+
-		"\2\2\u00a0\u00a1\5\4\3\2\u00a1\u00a2\7#\2\2\u00a2\31\3\2\2\2\u00a3\u00a8"+
-		"\7\60\2\2\u00a4\u00a5\7*\2\2\u00a5\u00a7\7\60\2\2\u00a6\u00a4\3\2\2\2"+
-		"\u00a7\u00aa\3\2\2\2\u00a8\u00a6\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\33"+
-		"\3\2\2\2\u00aa\u00a8\3\2\2\2\u00ab\u00b0\5\36\20\2\u00ac\u00ad\7*\2\2"+
-		"\u00ad\u00af\5\36\20\2\u00ae\u00ac\3\2\2\2\u00af\u00b2\3\2\2\2\u00b0\u00ae"+
-		"\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\35\3\2\2\2\u00b2\u00b0\3\2\2\2\u00b3"+
-		"\u00b4\b\20\1\2\u00b4\u00b5\7\36\2\2\u00b5\u00d8\5\36\20\26\u00b6\u00b7"+
-		"\7\32\2\2\u00b7\u00d8\5\36\20\25\u00b8\u00d8\7.\2\2\u00b9\u00d8\7-\2\2"+
-		"\u00ba\u00d8\7\22\2\2\u00bb\u00bd\5\n\6\2\u00bc\u00be\5\"\22\2\u00bd\u00bc"+
-		"\3\2\2\2\u00bd\u00be\3\2\2\2\u00be\u00d8\3\2\2\2\u00bf\u00c1\5 \21\2\u00c0"+
-		"\u00c2\5\"\22\2\u00c1\u00c0\3\2\2\2\u00c1\u00c2\3\2\2\2\u00c2\u00d8\3"+
-		"\2\2\2\u00c3\u00c5\7\60\2\2\u00c4\u00c6\5\"\22\2\u00c5\u00c4\3\2\2\2\u00c5"+
-		"\u00c6\3\2\2\2\u00c6\u00d8\3\2\2\2\u00c7\u00c9\7\61\2\2\u00c8\u00ca\5"+
-		"\"\22\2\u00c9\u00c8\3\2\2\2\u00c9\u00ca\3\2\2\2\u00ca\u00d8\3\2\2\2\u00cb"+
-		"\u00cc\7&\2\2\u00cc\u00cd\5\36\20\2\u00cd\u00cf\7\'\2\2\u00ce\u00d0\5"+
-		"\"\22\2\u00cf\u00ce\3\2\2\2\u00cf\u00d0\3\2\2\2\u00d0\u00d8\3\2\2\2\u00d1"+
-		"\u00d2\7\5\2\2\u00d2\u00d4\7&\2\2\u00d3\u00d5\7\61\2\2\u00d4\u00d3\3\2"+
-		"\2\2\u00d4\u00d5\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6\u00d8\7\'\2\2\u00d7"+
-		"\u00b3\3\2\2\2\u00d7\u00b6\3\2\2\2\u00d7\u00b8\3\2\2\2\u00d7\u00b9\3\2"+
-		"\2\2\u00d7\u00ba\3\2\2\2\u00d7\u00bb\3\2\2\2\u00d7\u00bf\3\2\2\2\u00d7"+
-		"\u00c3\3\2\2\2\u00d7\u00c7\3\2\2\2\u00d7\u00cb\3\2\2\2\u00d7\u00d1\3\2"+
-		"\2\2\u00d8\u00f9\3\2\2\2\u00d9\u00da\f\24\2\2\u00da\u00db\7\31\2\2\u00db"+
-		"\u00f8\5\36\20\24\u00dc\u00dd\f\23\2\2\u00dd\u00de\t\2\2\2\u00de\u00f8"+
-		"\5\36\20\24\u00df\u00e0\f\22\2\2\u00e0\u00e1\t\3\2\2\u00e1\u00f8\5\36"+
-		"\20\23\u00e2\u00e3\f\21\2\2\u00e3\u00e4\t\4\2\2\u00e4\u00f8\5\36\20\22"+
-		"\u00e5\u00e6\f\20\2\2\u00e6\u00e7\t\5\2\2\u00e7\u00f8\5\36\20\21\u00e8"+
-		"\u00e9\f\17\2\2\u00e9\u00ea\7\24\2\2\u00ea\u00f8\5\36\20\20\u00eb\u00ec"+
-		"\f\16\2\2\u00ec\u00ed\7\23\2\2\u00ed\u00f8\5\36\20\17\u00ee\u00ef\f\r"+
-		"\2\2\u00ef\u00f0\7+\2\2\u00f0\u00f1\5\36\20\2\u00f1\u00f2\7,\2\2\u00f2"+
-		"\u00f3\5\36\20\16\u00f3\u00f8\3\2\2\2\u00f4\u00f5\f\f\2\2\u00f5\u00f6"+
-		"\7\21\2\2\u00f6\u00f8\5\36\20\r\u00f7\u00d9\3\2\2\2\u00f7\u00dc\3\2\2"+
-		"\2\u00f7\u00df\3\2\2\2\u00f7\u00e2\3\2\2\2\u00f7\u00e5\3\2\2\2\u00f7\u00e8"+
-		"\3\2\2\2\u00f7\u00eb\3\2\2\2\u00f7\u00ee\3\2\2\2\u00f7\u00f4\3\2\2\2\u00f8"+
-		"\u00fb\3\2\2\2\u00f9\u00f7\3\2\2\2\u00f9\u00fa\3\2\2\2\u00fa\37\3\2\2"+
-		"\2\u00fb\u00f9\3\2\2\2\u00fc\u00fe\7$\2\2\u00fd\u00ff\5\34\17\2\u00fe"+
-		"\u00fd\3\2\2\2\u00fe\u00ff\3\2\2\2\u00ff\u0100\3\2\2\2\u0100\u0101\7%"+
-		"\2\2\u0101!\3\2\2\2\u0102\u0103\7$\2\2\u0103\u0104\5\36\20\2\u0104\u0105"+
-		"\7%\2\2\u0105\u0107\3\2\2\2\u0106\u0102\3\2\2\2\u0107\u0108\3\2\2\2\u0108"+
-		"\u0106\3\2\2\2\u0108\u0109\3\2\2\2\u0109#\3\2\2\2\34&,.\65@DLRXjpt\u008c"+
-		"\u00a8\u00b0\u00bd\u00c1\u00c5\u00c9\u00cf\u00d4\u00d7\u00f7\u00f9\u00fe"+
-		"\u0108";
+		"\b\n\f\16\20\22\24\26\30\32\34\36 \"\2\6\3\2.\60\3\2,-\4\2\'(*+\3\2%&"+
+		"\2\u012a\2&\3\2\2\2\4.\3\2\2\2\6@\3\2\2\2\bB\3\2\2\2\nj\3\2\2\2\fl\3\2"+
+		"\2\2\16v\3\2\2\2\20|\3\2\2\2\22\u0083\3\2\2\2\24\u0088\3\2\2\2\26\u0093"+
+		"\3\2\2\2\30\u009d\3\2\2\2\32\u00a3\3\2\2\2\34\u00ab\3\2\2\2\36\u00d7\3"+
+		"\2\2\2 \u00fc\3\2\2\2\"\u0106\3\2\2\2$\'\5\4\3\2%\'\5\6\4\2&$\3\2\2\2"+
+		"&%\3\2\2\2\'(\3\2\2\2()\7\2\2\3)\3\3\2\2\2*-\5\6\4\2+-\5\24\13\2,*\3\2"+
+		"\2\2,+\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\65\3\2\2\2\60.\3\2\2\2"+
+		"\61\62\7\f\2\2\62\63\5\36\20\2\63\64\7\67\2\2\64\66\3\2\2\2\65\61\3\2"+
+		"\2\2\65\66\3\2\2\2\66\5\3\2\2\2\678\5\b\5\289\7\67\2\29A\3\2\2\2:;\5\n"+
+		"\6\2;<\7\67\2\2<A\3\2\2\2=A\5\f\7\2>A\5\26\f\2?A\5\30\r\2@\67\3\2\2\2"+
+		"@:\3\2\2\2@=\3\2\2\2@>\3\2\2\2@?\3\2\2\2A\7\3\2\2\2BD\7?\2\2CE\5\"\22"+
+		"\2DC\3\2\2\2DE\3\2\2\2EF\3\2\2\2FG\78\2\2GH\5\36\20\2H\t\3\2\2\2IJ\7>"+
+		"\2\2JL\7\65\2\2KM\5\34\17\2LK\3\2\2\2LM\3\2\2\2MN\3\2\2\2Nk\7\66\2\2O"+
+		"P\7?\2\2PR\7\65\2\2QS\5\34\17\2RQ\3\2\2\2RS\3\2\2\2ST\3\2\2\2Tk\7\66\2"+
+		"\2UV\7\4\2\2VX\7\65\2\2WY\5\36\20\2XW\3\2\2\2XY\3\2\2\2YZ\3\2\2\2Zk\7"+
+		"\66\2\2[\\\7\5\2\2\\]\7\65\2\2]^\5\36\20\2^_\7\66\2\2_k\3\2\2\2`a\7\7"+
+		"\2\2ab\7\65\2\2bc\5\36\20\2cd\7\66\2\2dk\3\2\2\2ef\7\b\2\2fg\7\65\2\2"+
+		"gh\5\36\20\2hi\7\66\2\2ik\3\2\2\2jI\3\2\2\2jO\3\2\2\2jU\3\2\2\2j[\3\2"+
+		"\2\2j`\3\2\2\2je\3\2\2\2k\13\3\2\2\2lp\5\16\b\2mo\5\20\t\2nm\3\2\2\2o"+
+		"r\3\2\2\2pn\3\2\2\2pq\3\2\2\2qt\3\2\2\2rp\3\2\2\2su\5\22\n\2ts\3\2\2\2"+
+		"tu\3\2\2\2u\r\3\2\2\2vw\7\n\2\2wx\5\36\20\2xy\7\61\2\2yz\5\4\3\2z{\7\62"+
+		"\2\2{\17\3\2\2\2|}\7\13\2\2}~\7\n\2\2~\177\5\36\20\2\177\u0080\7\61\2"+
+		"\2\u0080\u0081\5\4\3\2\u0081\u0082\7\62\2\2\u0082\21\3\2\2\2\u0083\u0084"+
+		"\7\13\2\2\u0084\u0085\7\61\2\2\u0085\u0086\5\4\3\2\u0086\u0087\7\62\2"+
+		"\2\u0087\23\3\2\2\2\u0088\u0089\7\t\2\2\u0089\u008a\7?\2\2\u008a\u008c"+
+		"\7\65\2\2\u008b\u008d\5\32\16\2\u008c\u008b\3\2\2\2\u008c\u008d\3\2\2"+
+		"\2\u008d\u008e\3\2\2\2\u008e\u008f\7\66\2\2\u008f\u0090\7\61\2\2\u0090"+
+		"\u0091\5\4\3\2\u0091\u0092\7\62\2\2\u0092\25\3\2\2\2\u0093\u0094\7\r\2"+
+		"\2\u0094\u0095\7?\2\2\u0095\u0096\78\2\2\u0096\u0097\5\36\20\2\u0097\u0098"+
+		"\7\17\2\2\u0098\u0099\5\36\20\2\u0099\u009a\7\61\2\2\u009a\u009b\5\4\3"+
+		"\2\u009b\u009c\7\62\2\2\u009c\27\3\2\2\2\u009d\u009e\7\16\2\2\u009e\u009f"+
+		"\5\36\20\2\u009f\u00a0\7\61\2\2\u00a0\u00a1\5\4\3\2\u00a1\u00a2\7\62\2"+
+		"\2\u00a2\31\3\2\2\2\u00a3\u00a8\7?\2\2\u00a4\u00a5\79\2\2\u00a5\u00a7"+
+		"\7?\2\2\u00a6\u00a4\3\2\2\2\u00a7\u00aa\3\2\2\2\u00a8\u00a6\3\2\2\2\u00a8"+
+		"\u00a9\3\2\2\2\u00a9\33\3\2\2\2\u00aa\u00a8\3\2\2\2\u00ab\u00b0\5\36\20"+
+		"\2\u00ac\u00ad\79\2\2\u00ad\u00af\5\36\20\2\u00ae\u00ac\3\2\2\2\u00af"+
+		"\u00b2\3\2\2\2\u00b0\u00ae\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\35\3\2\2"+
+		"\2\u00b2\u00b0\3\2\2\2\u00b3\u00b4\b\20\1\2\u00b4\u00b5\7-\2\2\u00b5\u00d8"+
+		"\5\36\20\26\u00b6\u00b7\7)\2\2\u00b7\u00d8\5\36\20\25\u00b8\u00d8\7=\2"+
+		"\2\u00b9\u00d8\7<\2\2\u00ba\u00d8\7\23\2\2\u00bb\u00bd\5\n\6\2\u00bc\u00be"+
+		"\5\"\22\2\u00bd\u00bc\3\2\2\2\u00bd\u00be\3\2\2\2\u00be\u00d8\3\2\2\2"+
+		"\u00bf\u00c1\5 \21\2\u00c0\u00c2\5\"\22\2\u00c1\u00c0\3\2\2\2\u00c1\u00c2"+
+		"\3\2\2\2\u00c2\u00d8\3\2\2\2\u00c3\u00c5\7?\2\2\u00c4\u00c6\5\"\22\2\u00c5"+
+		"\u00c4\3\2\2\2\u00c5\u00c6\3\2\2\2\u00c6\u00d8\3\2\2\2\u00c7\u00c9\7@"+
+		"\2\2\u00c8\u00ca\5\"\22\2\u00c9\u00c8\3\2\2\2\u00c9\u00ca\3\2\2\2\u00ca"+
+		"\u00d8\3\2\2\2\u00cb\u00cc\7\65\2\2\u00cc\u00cd\5\36\20\2\u00cd\u00cf"+
+		"\7\66\2\2\u00ce\u00d0\5\"\22\2\u00cf\u00ce\3\2\2\2\u00cf\u00d0\3\2\2\2"+
+		"\u00d0\u00d8\3\2\2\2\u00d1\u00d2\7\6\2\2\u00d2\u00d4\7\65\2\2\u00d3\u00d5"+
+		"\7@\2\2\u00d4\u00d3\3\2\2\2\u00d4\u00d5\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6"+
+		"\u00d8\7\66\2\2\u00d7\u00b3\3\2\2\2\u00d7\u00b6\3\2\2\2\u00d7\u00b8\3"+
+		"\2\2\2\u00d7\u00b9\3\2\2\2\u00d7\u00ba\3\2\2\2\u00d7\u00bb\3\2\2\2\u00d7"+
+		"\u00bf\3\2\2\2\u00d7\u00c3\3\2\2\2\u00d7\u00c7\3\2\2\2\u00d7\u00cb\3\2"+
+		"\2\2\u00d7\u00d1\3\2\2\2\u00d8\u00f9\3\2\2\2\u00d9\u00da\f\24\2\2\u00da"+
+		"\u00db\7\3\2\2\u00db\u00f8\5\36\20\24\u00dc\u00dd\f\23\2\2\u00dd\u00de"+
+		"\t\2\2\2\u00de\u00f8\5\36\20\24\u00df\u00e0\f\22\2\2\u00e0\u00e1\t\3\2"+
+		"\2\u00e1\u00f8\5\36\20\23\u00e2\u00e3\f\21\2\2\u00e3\u00e4\t\4\2\2\u00e4"+
+		"\u00f8\5\36\20\22\u00e5\u00e6\f\20\2\2\u00e6\u00e7\t\5\2\2\u00e7\u00f8"+
+		"\5\36\20\21\u00e8\u00e9\f\17\2\2\u00e9\u00ea\7$\2\2\u00ea\u00f8\5\36\20"+
+		"\20\u00eb\u00ec\f\16\2\2\u00ec\u00ed\7#\2\2\u00ed\u00f8\5\36\20\17\u00ee"+
+		"\u00ef\f\r\2\2\u00ef\u00f0\7:\2\2\u00f0\u00f1\5\36\20\2\u00f1\u00f2\7"+
+		";\2\2\u00f2\u00f3\5\36\20\16\u00f3\u00f8\3\2\2\2\u00f4\u00f5\f\f\2\2\u00f5"+
+		"\u00f6\7\22\2\2\u00f6\u00f8\5\36\20\r\u00f7\u00d9\3\2\2\2\u00f7\u00dc"+
+		"\3\2\2\2\u00f7\u00df\3\2\2\2\u00f7\u00e2\3\2\2\2\u00f7\u00e5\3\2\2\2\u00f7"+
+		"\u00e8\3\2\2\2\u00f7\u00eb\3\2\2\2\u00f7\u00ee\3\2\2\2\u00f7\u00f4\3\2"+
+		"\2\2\u00f8\u00fb\3\2\2\2\u00f9\u00f7\3\2\2\2\u00f9\u00fa\3\2\2\2\u00fa"+
+		"\37\3\2\2\2\u00fb\u00f9\3\2\2\2\u00fc\u00fe\7\63\2\2\u00fd\u00ff\5\34"+
+		"\17\2\u00fe\u00fd\3\2\2\2\u00fe\u00ff\3\2\2\2\u00ff\u0100\3\2\2\2\u0100"+
+		"\u0101\7\64\2\2\u0101!\3\2\2\2\u0102\u0103\7\63\2\2\u0103\u0104\5\36\20"+
+		"\2\u0104\u0105\7\64\2\2\u0105\u0107\3\2\2\2\u0106\u0102\3\2\2\2\u0107"+
+		"\u0108\3\2\2\2\u0108\u0106\3\2\2\2\u0108\u0109\3\2\2\2\u0109#\3\2\2\2"+
+		"\34&,.\65@DLRXjpt\u008c\u00a8\u00b0\u00bd\u00c1\u00c5\u00c9\u00cf\u00d4"+
+		"\u00d7\u00f7\u00f9\u00fe\u0108";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

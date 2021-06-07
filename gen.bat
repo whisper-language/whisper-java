@@ -1,0 +1,1 @@
+java -jar ../antlr-4.9.2-complete.jar -no-listener -package net.crtrpt.whisper.gen  -o src/main/java/net/crtrpt/whisper/gen -visitor ../whisper-grammar/WhisperLanguage.g4
